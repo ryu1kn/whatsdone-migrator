@@ -12,6 +12,7 @@
   "dependencies": {
     "aws-sdk": "^2.7.15",
     "lodash": "^4.17.2",
+    "minimist": "^1.2.0",
     "mongodb": "^2.2.16",
     "uuid": "^3.0.1"
   },

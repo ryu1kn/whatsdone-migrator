@@ -2,7 +2,7 @@
 # whatsdone-migrator
 
 ```sh
-$ node migrate --config config.json
+$ node migrate-db --config config.json
 ```
 
 ```json
@@ -15,10 +15,10 @@ $ node migrate --config config.json
         "tableName": ""
     },
     "replace-fields": {
-        "userId": [
-            ["FROM_VALUE", "TO_VALUE"],
-            ["FROM_VALUE", "TO_VALUE"]
-        ]
+        "userId": {
+            "FROM_VALUE_1": "TO_VALUE_1",
+            "FROM_VALUE_2": "TO_VALUE_2"
+        }
     }
 }
 ```
