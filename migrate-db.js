@@ -13,24 +13,24 @@ const context = new Context({
     userIdMap: config['replace-fields'].userId
 });
 
-const fromRepo = context.getMongoDBRepo();
-const toRepo = context.getDynamoDBRepo();
+const fromMongoRepo = context.getMongoDBRepo();
+const toDynamoRepo = context.getDynamoDBRepo();
 const transformer = context.getDoneItemTransformStream();
 
-fromRepo.getAllAsStream().then(readStream => {
+fromMongoRepo.getAllAsStream().then(readStream => {
     return new Promise((resolve, reject) => {
         readStream
             .pipe(transformer)
-            .pipe(toRepo.provideWriteStream())
+            .pipe(toDynamoRepo.provideWriteStream())
             .on('finish', resolve)
             .on('error', reject);
     });
 }).then(
     () => {
-        fromRepo.closeConnection();
+        fromMongoRepo.closeConnection();
     },
     e => {
-        fromRepo.closeConnection();
+        fromMongoRepo.closeConnection();
         setTimeout(() => {
             throw e;
         });
